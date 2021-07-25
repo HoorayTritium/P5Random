@@ -1,11 +1,11 @@
-import processing.library.template.*;
+import p5.random.*;
 
-Sample sample;
+XorShiftRandom random = new XorShiftRandom();
 
 void setup() {
-  size(600, 600);
-  sample = new Sample(this);
-}
-void draw() {
-  sample.drawCircle(100, 100, 50);
+  size(400, 400);
+  double d = random.random(height);
+  for (int i=0; i<width-1; i++) {
+    line(i, (float)d, i+1, (float)(d=random.random(height)));
+  }
 }

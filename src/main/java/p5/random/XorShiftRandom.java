@@ -7,19 +7,27 @@ public class XorShiftRandom {
   final long M = (long) Math.pow(2, 32);
   int seed = 0;
 
-  XorShiftRandom() {
+  public XorShiftRandom() {
     seed = (int) xRandomSeed();
   }
 
-  double nextDouble(int max) {
+  public double random(double low, double high){
+    return nextDouble(high - low) + low;
+  }
+
+  public double random(double high){
+    return nextDouble(high);
+  }
+
+  public double random(){
+    return nextDouble(1);
+  }
+
+  double nextDouble(double max) {
     long i = xor32();
     long l = i < 0 ? i + M : i;
     double d = max * (l / (M - .9d));
     return d;
-  }
-
-  double nextDouble() {
-    return nextDouble(1);
   }
 
   int xor32() {
@@ -33,7 +41,7 @@ public class XorShiftRandom {
     return System.currentTimeMillis();
   }
 
-  void setSeed(int _s) {
+  public void setSeed(int _s) {
     seed = _s;
   }
 }
